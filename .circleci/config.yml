@@ -98,8 +98,8 @@ jobs:
     - deploy:
         name: Push application Docker image
         command: |
-          docker tag app "yupmin-ct/${CIRCLE_PROJECT_REPONAME}"
-          docker tag web "yupmin-ct/${CIRCLE_PROJECT_REPONAME}-web"
+          docker tag app "yupmin-ct/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_TAG}"
+          docker tag web "yupmin-ct/${CIRCLE_PROJECT_REPONAME}-web:${CIRCLE_TAG}"
           docker images
 
 workflows:
@@ -111,7 +111,7 @@ workflows:
         requires:
         - testing
         filters:
-#          branches:
-#            ignore: /.*/
+          branches:
+            ignore: /.*/
           tags:
             only: /^\d+\.\d+\.\d+$/
