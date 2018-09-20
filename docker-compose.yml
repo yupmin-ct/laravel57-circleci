@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /var/www/html
+    networks:
+      - php-backend
+    volumes:
+    - source-data:/var/www/html
+    env_file:
+    - .env
+  web:
+    build:
+      context: ./docker
+      dockerfile: web.dockerfile
+    working_dir: /var/www/html
+    networks:
+    - php-backend
+    volumes:
+    - source-data:/var/www/html
+    ports:
+    - 18091:80
+    - 18092:443
+
+volumes:
+  source-data:
+
+networks:
+  php-backend:
