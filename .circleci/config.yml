@@ -67,10 +67,10 @@ jobs:
         paths:
         - /caches/app.tar
 
-    - run:
-        name: Copy .env
-        command: |
-          cp .env.example .env
+#    - run:
+#        name: Copy .env
+#        command: |
+#          cp .env.example .env
 
     - run:
         name: Load Docker image layer cache
@@ -98,8 +98,8 @@ jobs:
     - deploy:
         name: Push application Docker image
         command: |
-          docker tag app "yupmin.com/yupmin-ct/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_TAG}"
-          docker tag web "yupmin.com/yupmin-ct/${CIRCLE_PROJECT_REPONAME}-web:${CIRCLE_TAG}"
+          docker tag app "yupmin-ct/${CIRCLE_PROJECT_REPONAME}"
+          docker tag web "yupmin-ct/${CIRCLE_PROJECT_REPONAME}-web"
           docker images
 
 workflows:
